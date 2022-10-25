@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">OurFirstProject</string>
+    <string name="app_headline">Det er snart frokost</string>
 </resources>
