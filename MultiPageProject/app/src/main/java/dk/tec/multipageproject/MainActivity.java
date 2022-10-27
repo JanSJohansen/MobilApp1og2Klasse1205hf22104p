@@ -1,7 +1,12 @@
 package dk.tec.multipageproject;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +22,11 @@ public class MainActivity extends AppCompatActivity
     TextView txtFromSecond;
     EditText txtToSecond;
 
+    final static String TEXT_FROM_MAIN = "FromMain";
+    final static String TEXT_FROM_SECOND = "FromSecond";
+
+    ActivityResultLauncher<Intent> secondLauncher;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -26,14 +36,31 @@ public class MainActivity extends AppCompatActivity
         txtFromSecond = findViewById(R.id.txtFromSecond);
         txtToSecond = findViewById(R.id.txtToSecond);
         btnGoToSecond = findViewById(R.id.btnGoToSecond);
+
+        secondLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result)
+                    {
+                        if(result.getResultCode() == Activity.RESULT_OK)
+                        {
+                            Intent data = result.getData();
+                            txtFromSecond.setText(data.getStringExtra(TEXT_FROM_SECOND));
+                        }}}
+        );
         btnGoToSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra("FromMain", txtToSecond.getText().toString());
-                startActivity(intent);
+                intent.putExtra(TEXT_FROM_MAIN, txtToSecond.getText().toString());
+                //startActivity(intent);
+                secondLauncher.launch(intent);
             }
         });
+
+
+
     }
 }
