@@ -58,24 +58,24 @@ public class MyGraphics extends View implements SensorEventListener
             xPosNew = (int) (xPos + xAcc/2);
             yPosNew = (int) (yPos + yAcc/2);
 
-            boolean left = false;
-            boolean right = false;
 
-            if(xPosNew + 30 < 0)  // udenfor til venstre
+            if(xPosNew + 30 < 0 || xPosNew + kugleWidth -30  > width)  // udenfor til venstre
             {
-                xAcc = xAcc * -0.8;
-                left = true;
+                xAcc = xAcc * -0.6;
             }
-            if(xPosNew + kugleWidth -30  > width)  // Udenfor til højre
-            {
-                xAcc = xAcc * -0.8;
-                right = true;
-            }
-            if(!(left || right))  // if(!left && !right)
+            else
             {
                 xPos = xPosNew;
             }
-
+//////////////
+            if(yPosNew + 30 < 0 || yPosNew + kugleHeight -30  > height)  // udenfor til venstre
+            {
+                yAcc = yAcc * -0.6;
+            }
+            else
+            {
+                yPos = yPosNew;
+            }
             invalidate();
         }
     }
