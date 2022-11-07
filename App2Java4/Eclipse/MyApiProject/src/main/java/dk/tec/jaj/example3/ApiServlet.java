@@ -1,5 +1,6 @@
 package dk.tec.jaj.example3;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -23,6 +24,21 @@ public class ApiServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
+	@Override
+	protected void doPost(HttpServletRequest request, 
+			             HttpServletResponse response) throws ServletException, IOException 
+	{
+		BufferedReader in = request.getReader();
+		String json = in.readLine();
+		System.out.println(json);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		Elev newElev = mapper.readValue(json, Elev.class);
+		System.out.println(newElev.navn);
+	
+		
+	}
 	
 	protected void doGet(HttpServletRequest request, 
 						 HttpServletResponse response) throws ServletException, IOException 
