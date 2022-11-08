@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity
         txtName = findViewById(R.id.txtName);
 
         ElevService elevService = ServiceBuilder.buildService(ElevService.class);
-        Call<Elev> request = elevService.getElevById(1000);
+        Call<Elev> request = elevService.getElevById(1004);
         request.enqueue(new Callback<Elev>() {
             @Override
             public void onResponse(Call<Elev> call, Response<Elev> response)
