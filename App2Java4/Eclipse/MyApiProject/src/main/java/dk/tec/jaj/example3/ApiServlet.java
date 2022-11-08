@@ -37,7 +37,6 @@ public class ApiServlet extends HttpServlet
 		Elev newElev = mapper.readValue(json, Elev.class);
 		System.out.println(newElev.navn);
 	
-		
 	}
 	
 	protected void doGet(HttpServletRequest request, 
@@ -69,4 +68,16 @@ public class ApiServlet extends HttpServlet
 				break;
 		}		
 	}
+	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doPut(req, resp);
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.doDelete(req, resp);
+	}	
 }
